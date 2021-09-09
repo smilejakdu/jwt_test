@@ -1,10 +1,15 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Users } from 'src/entities/Users';
 import { Repository } from 'typeorm';
 import bcrypt from 'bcrypt';
 import { log } from 'console';
 import { JwtService } from '@nestjs/jwt';
+
+export class SignInResponseDto {
+		user : Users
+  	access_token?: string;
+}
 
 @Injectable()
 export class UsersService {
@@ -34,12 +39,12 @@ export class UsersService {
 		return createUser;
 	}
 
-	async logIn(id:number , username:string) {
+	async logIn(id:number , username:string): Promise<SignInResponseDto> {
 		const user = await this.usersRepository.findOne({
 			 where: { id:id ,username :username},
 			 select: ['id', 'username', 'createdAt' , 'updatedAt'],	
 		}); 
-    const payload = { username: username, sub: id };
+    const payload = { username: username, id: id };
 
 		return { 
 			user : user,

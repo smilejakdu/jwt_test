@@ -4,10 +4,7 @@ import {
 	Controller,
 	Get,
 	Post,
-	Req,
-	Res,
 	UseGuards,
-	UseInterceptors,
 } from '@nestjs/common';
 import {
 	ApiCreatedResponse,
