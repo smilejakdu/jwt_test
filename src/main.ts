@@ -1,7 +1,6 @@
-import { NestFactory } from '@nestjs/core';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { AppModule } from './app.module';
-import passport from 'passport';
+import { NestFactory } from "@nestjs/core";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { AppModule } from "./app.module";
 
 declare const module: any;
 
@@ -10,16 +9,16 @@ async function bootstrap() {
   const port = process.env.PORT || 3000;
 
   const config = new DocumentBuilder()
-  .setTitle('nestWatcha API')
-  .setDescription('nestWatcha Swagger')
-  .setVersion('1.0')
-  .addCookieAuth('connect.sid')
-  .build();
+    .setTitle("nestWatcha API")
+    .setDescription("nestWatcha Swagger")
+    .setVersion("1.0")
+    .addCookieAuth("connect.sid")
+    .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup("api", app, document);
 
-	await app.listen(port);
-	console.log(`listening on port ${port}`);
+  await app.listen(port);
+  console.log(`listening on port ${port}`);
 
   if (module.hot) {
     module.hot.accept();

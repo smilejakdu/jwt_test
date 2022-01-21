@@ -6,28 +6,28 @@ import {
   Index,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-} from 'typeorm';
-import { IsNotEmpty, IsString } from 'class-validator';
-import { ApiProperty } from '@nestjs/swagger';
+} from "typeorm";
+import { IsNotEmpty, IsString } from "class-validator";
+import { ApiProperty } from "@nestjs/swagger";
 
-@Index('username', ['username'], { unique: true })
-@Entity({ schema: 'jwt_test', name: 'users' })
+@Index("username", ["username"], { unique: true })
+@Entity({ schema: "jwt_test", name: "users" })
 export class Users {
-  @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
+  @PrimaryGeneratedColumn({ type: "int", name: "id" })
   id: number;
 
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
-    example: 'ash',
-    description: 'username',
+    example: "ash",
+    description: "username",
   })
-  @Column('varchar', { name: 'username', length: 80 })
+  @Column("varchar", { name: "username", length: 80 })
   username: string;
 
   @IsString()
   @IsNotEmpty()
-  @Column('varchar', { name: 'password', length: 150, select: false }) // select: false 하면 password 빼고 불러온다.
+  @Column("varchar", { name: "password", length: 150 }) // select: false 하면 password 빼고 불러온다.
   password: string;
 
   @CreateDateColumn()
