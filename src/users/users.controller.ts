@@ -39,8 +39,8 @@ export class UsersController {
   @UseGuards(JwtAuthGuard)
   @Get("profile")
   async getProfile(@Token() user) {
-    console.log("getprofile req:", user);
-    return user || false;
+    const { id, username } = user;
+    return await this.usersService.userProfile(id, username);
   }
 
   @ApiOperation({ summary: "회원가입" })

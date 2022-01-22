@@ -60,4 +60,16 @@ export class UsersService {
       access_token: this.jwtService.sign(payload),
     };
   }
+
+  async userProfile(id: number, username: string) {
+    const foundUser = await this.usersRepository.findOne({
+      where: { id: id, username: username },
+    });
+
+    if (!foundUser) {
+      return "does not found user";
+    }
+    delete foundUser.password;
+    return foundUser;
+  }
 }
