@@ -7,6 +7,7 @@ import {
   UseGuards,
 } from "@nestjs/common";
 import {
+  ApiBearerAuth,
   ApiCreatedResponse,
   ApiInternalServerErrorResponse,
   ApiOkResponse,
@@ -36,6 +37,7 @@ export class UsersController {
     status: 500,
     description: "서버 에러",
   })
+  @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
   @Get("profile")
   async getProfile(@Token() user) {
